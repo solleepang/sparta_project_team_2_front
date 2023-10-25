@@ -9,45 +9,30 @@ async function getArticle() {
     method: "GET",
   });
 
-  let token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk4MjI1MjY2LCJpYXQiOjE2OTgyMjQ5NjYsImp0aSI6IjhjMDNjZTZhZWI4ODRkZGJiODhjNTI1ODQ5YjA0NzBmIiwidXNlcl9pZCI6MiwiZW1haWwiOiJvcmVvMDEyNEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6Im9yZW8iLCJpbWFnZSI6Ii9tZWRpYS9zdGF0aWMvZGVmYXVsdF9pbWFnZS5qcGVnIn0.fqfd-bYV6luPh5t9piYQr0vUMH37JK1v846a15x_Zao";
-  localStorage.setItem("token", token);
-
   const response_json = await response.json();
   console.log(response_json);
 
   // 게시글 정보 보여주기
   const articles = document.getElementById("articles");
+  let html = "";
 
   response_json.forEach((element) => {
-    const article = document.createElement("div");
-    const title = document.createElement("h3");
-    const content = document.createElement("div");
-    const store_name = document.createElement("div");
-    const button = document.createElement("button");
-    const button2 = document.createElement("button");
+    html += `<div id="article" class="card mb-3" onclick="getDetailArticle(${element.id})">
+                <div id="${element.id}" class="card-body">
+                  <h6 id="store_name" class="card-title">${element.store_name}</h6>
+                  <h5 id="title" class="card-title">${element.title}</h5>
+                  <p id="content" class="card-text">${element.content}</p>
+                  <p id="author" class="card-text" style="text-align: right">${element.username}</p>
+                </div>
+              </div>`;
 
-    article.id = element.id;
-    title.innerText = element.title;
-    title.id = "title";
-    content.innerText = element.content;
-    content.id = "content";
-    store_name.innerText = element.store_name;
-    button.innerText = "X";
-    button2.innerText = "수정";
-
-    button.addEventListener("click", e => {
-      deleteArticle(e);
-    });
-
-    button2.addEventListener("click", (e) => {
-      putArticle(e);
-    });
-
-    article.append(title, content, store_name, button, button2);
-    articles.appendChild(article);
-  
+    $("#articles").html(html);
   });
+}
+
+async function getDetailArticle(articleID) {
+  // 특정 게시글 상세 페이지로 이동
+  window.location.href = `/article/detail_article.html?articleID=${articleID}`;
 }
 
 async function postArticle() {
@@ -59,7 +44,7 @@ async function postArticle() {
   const longitudeField = document.getElementById("longitudeField").value;
 
   // 로그인 토큰 가져오기
-  let token = localStorage.getItem("token");
+  // let token = localStorage.getItem("token");
 
   const response = await fetch("http://127.0.0.1:8000/article/", {
     headers: {
