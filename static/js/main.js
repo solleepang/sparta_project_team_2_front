@@ -2,4 +2,5 @@
 $(document).ready(function () {
   $("#header").load("/header.html");
   $("#footer").load("/footer.html");
+  $("#nav-bar").load("/nav-bar.html");
 });
