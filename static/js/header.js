@@ -7,6 +7,7 @@ $(document).ready(function () {
         $("#signup-btn").hide();
         $("#logout-btn").show();
         $("#my-page").show();
+        $("#hello").show();
         // $("#username").text(`${userData.username}님 환영합니다.`);
     }
 });

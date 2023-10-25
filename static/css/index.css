@@ -3,3 +3,17 @@
   font-family: 'Black Han Sans', sans-serif;
   font-size: 24px;
 }
+
+.search-btn {
+    border-color: #49C9C7;
+    color: #49C9C7;
+    &:hover{
+        color: #fff;
+        background-color: #49C9C7;
+    }
+}
+
+.fixed-nav{
+  position: fixed;
+  top: 100px;
+}
