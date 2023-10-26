@@ -17,7 +17,7 @@ function read_list(list_json) {
   const restaurant_list = document.getElementById(('card_list'))
   for (var r in list_json) {
     const restaurant = list_json[r]
-    console.log(restaurant)
+    // console.log(restaurant)
 
     // 리스트에 속성 추가
     const restaurant_article = document.createElement('article')
@@ -32,6 +32,7 @@ function read_list(list_json) {
     const restaurant_review = document.createElement('p')
     const restaurant_contact = document.createElement('p')
     const restaurant_address = document.createElement('p')
+    const restaurant_distance = document.createElement('p')
 
 
     restaurant_name.innerText = restaurant.name
@@ -39,14 +40,19 @@ function read_list(list_json) {
     restaurant_review.innerText = `리뷰개수: ${restaurant.review}`
     restaurant_address.innerText = `주소: ${restaurant.address}`
     restaurant_contact.innerText = restaurant.contact
-
+    if (restaurant.distance == undefined) {
+    }
+    else {
+      restaurant_distance.innerText = `가게까지의 거리: ${restaurant.distance}km`
+    }
     restaurant_article.appendChild(restaurant_card)
     restaurant_card.appendChild(restaurant_card_container)
     restaurant_card_container.appendChild(restaurant_name)
     restaurant_card_container.appendChild(restaurant_score)
     restaurant_score.appendChild(restaurant_review)
-    restaurant_score.appendChild(restaurant_address)
-    restaurant_score.appendChild(restaurant_contact)
+    restaurant_card_container.appendChild(restaurant_address)
+    restaurant_address.appendChild(restaurant_distance)
+    restaurant_card_container.appendChild(restaurant_contact)
 
     restaurant_list.appendChild(restaurant_article)
   }
@@ -66,8 +72,11 @@ async function handleOrderSelect() {
     const list_score_json = await printJSON("static/data/df_score.json");
     read_list(list_score_json)
   }
-  else {
+  else if (checked_option == "distance") {
     loadDistanceOrder()
+  }
+  else {
+    alert('오류')
   }
 }
 
@@ -76,7 +85,7 @@ async function handleOrderSelect() {
 async function loadDistanceOrder() {
   // console.log('order by distance 함수 실행')
   const list_json = await printJSON("static/data/df.json");
-  console.log(list_json)
+  // console.log(list_json)
   //거리계산함수
   function getDistance(lat1, lon1, lat2, lon2, unit) {
     if ((lat1 == lat2) && (lon1 == lon2)) {
@@ -113,7 +122,7 @@ async function loadDistanceOrder() {
       const lat = list_json[i].lat
       const lon = list_json[i].lon
       distance = getDistance(live_lat, live_lon, lat, lon, "K")
-      list_json[i]['distance'] = distance;
+      list_json[i]['distance'] = distance.toFixed(2);
     }
     //더미 데이터의 길이만큼 거리계산을 반복하는데, K가 인자로 들어가 킬로미터 단위로 계산한다
     //더미 데이터가 든 사전에는 distance라는 키와 값이 추가가 된다.
@@ -176,3 +185,7 @@ function handleCreateBtn(restaurant_name) {
   localStorage.setItem("restaurant_name", name);
   location.href = "http://127.0.0.1:5500/article/post_article.html";
 }
+
+// 페이지네이션
+
+

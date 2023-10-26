@@ -6,7 +6,7 @@ body {
     padding: 0;
 }
 
-#map_d11deb67d4fdcc6b02121dac33010707 {
+.folium-map {
     position: relative;
     width: 100.0%;
     height: 100.0%;
@@ -232,5 +232,5 @@ p {
 }
 
 .option {
-    margin-left: 450px;
+    margin-left: 29%;
 }
