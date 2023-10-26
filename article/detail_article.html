@@ -39,7 +39,7 @@
                             <h6 id="store_name" class="card-title"></h6>
                             <h5 id="title" class="card-title"></h5>
                             <p id="content" class="card-text"></p>
-                            <p id="author" class="card-text" style="text-align: right"></p>
+                            <p id="author" class="card-text" style="text-align: right;"></p>
                         </div>
                     </div>
                     <div id="map" style="width:100%;height:350px;"></div>
@@ -47,11 +47,47 @@
                     <input id="longitude" class="card-text" style="display: none;">
                     <div style="margin-top: 10px; text-align: right">
                         <button id="friend-btn" type="button" class="btn search-btn">밥친구 신청</button>
-                        <button id="edit-btn" type="button" class="btn btn-success" style="display: none;">수정하기</button>
+                        <button id="edit-btn" data-bs-toggle="modal" data-bs-target="#editModal" type="button"
+                            class="btn btn-success" style="display: none;">수정하기</button>
                         <button id="del-btn" type="button" class="btn btn-danger" style="display: none;">삭제하기</button>
+                    </div>
+                    <div id="friend" class="card mb-3" style="margin-top: 10px;">
+                        <div class="card-body">
+                            <p id="friends" class="card-text" style="font-size: 14px;">모집 현황: <span
+                                    id="friends-number"></span></p>
+                            <div id="friend-list" style="margin-top: 10px; margin-left: 10px;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+        </div>
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="editModalLabel">수정하기</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="edit-form">
+                            <div class="mb-3">
+                                <label for="modal-form-title" class="col-form-label">제목</label>
+                                <input type="text" class="form-control" id="modal-form-title">
+                            </div>
+                            <div class="mb-3">
+                                <label for="modal-form-content" class="col-form-label">내용</label>
+                                <textarea class="form-control" id="modal-form-content"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                <button id="edit-btn-modal" type="submit" class="btn btn-primary">수정 완료</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
     </main>
     <div id="footer"></div>

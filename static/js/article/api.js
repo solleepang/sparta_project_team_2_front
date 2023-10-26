@@ -1,5 +1,4 @@
 window.onload = () => {
-  console.log("로딩");
   getArticle();
 };
 
@@ -10,7 +9,6 @@ async function getArticle() {
   });
 
   const response_json = await response.json();
-  console.log(response_json);
 
   // 게시글 정보 보여주기
   const articles = document.getElementById("articles");
@@ -22,6 +20,7 @@ async function getArticle() {
                   <h6 id="store_name" class="card-title">${element.store_name}</h6>
                   <h5 id="title" class="card-title">${element.title}</h5>
                   <p id="content" class="card-text">${element.content}</p>
+                  <p id="friends" class="card-text" style="font-size: 14px;">모집 현황: <span id="friends-number">${element.member_count} / ${element.friends_number}</span></p>
                   <p id="author" class="card-text" style="text-align: right">${element.username}</p>
                 </div>
               </div>`;
@@ -44,7 +43,7 @@ async function postArticle() {
   const longitudeField = document.getElementById("longitudeField").value;
 
   // 로그인 토큰 가져오기
-  // let token = localStorage.getItem("token");
+  let token = localStorage.getItem("access");
 
   const response = await fetch("http://127.0.0.1:8000/article/", {
     headers: {
@@ -60,54 +59,4 @@ async function postArticle() {
       longitudeField: longitudeField,
     }),
   });
-  const response_json = await response.json();
-  console.log(response_json);
-}
-
-async function putArticle(e) {
-  // 게시글 수정하기
-  // 로그인 토큰 가져오기
-  let token = localStorage.getItem("token");
-
-  target_id = e.target.parentElement.id;
-  console.log(target_id);
-
-  const response = await fetch(`http://127.0.0.1:8000/article/${target_id}/`, {
-    headers: {
-      "content-type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    method: "PUT",
-    body: JSON.stringify({
-      title: title,
-      content: content,
-    }),
-  });
-  const response_json = await response.json();
-  console.log(response_json);
-  // 작성자와 수정자가 같을 경우 = 게시글 수정
-  // 작성자와 수정자가 다를 경우 = 밥친구 신청
-}
-
-async function deleteArticle(e) {
-  // 게시글 지우기
-  target = e.target.parentElement;
-  console.log(target);
-
-  title = target.children.title.innerText;
-  content = target.children.content.innerText;
-  console.log(title, content);
-
-  // 로그인 토큰 가져오기
-  let token = localStorage.getItem("token");
-
-  const response = await fetch(`http://127.0.0.1:8000/article/${target.id}/`, {
-    headers: {
-      "content-type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    method: "DELETE",
-  });
-
-  console.log(response);
 }
