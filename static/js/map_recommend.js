@@ -15,6 +15,7 @@ async function printJSON(file_path) {
 // 리스트 정렬하는 함수
 function read_list(list_json) {
   const restaurant_list = document.getElementById(('list'))
+  restaurant_list.innerHTML ='' // 정렬 옵션을 바꿔도 이전 리스트가 보이지 않게끔 list 비워주기
   for (var r in list_json) {
     const restaurant = list_json[r]
 
@@ -25,11 +26,11 @@ function read_list(list_json) {
     const score_span = document.createElement('span')
     const review_span = document.createElement('span')
 
-    name_span.innerText = restaurant.name
-    // address_span.innerText = restaurant.address
-    // contact_span.innerText = restaurant.contact
-    score_span.innerText = restaurant.score
-    review_span.innerText = restaurant.review
+    name_span.innerText = restaurant.name+' '
+    address_span.innerText = restaurant.address+' '
+    contact_span.innerText = restaurant.contact+' '
+    score_span.innerText = restaurant.score+' '
+    review_span.innerText = restaurant.review+' '
 
     restaurant_div.appendChild(name_span)
     restaurant_div.appendChild(address_span)
@@ -43,32 +44,22 @@ function read_list(list_json) {
 
 
 // 정렬 옵션에 따라서 그에 맞는 리스트 정렬 함수 실행
-function handleOrderSelect() {
+async function handleOrderSelect() {
   const checked_option = document.querySelector('#order-by > option:checked').value
-  // console.log(checked_option)
 
-  if (checked_option == "review") {
-    loadReviewOrder()
+  if (checked_option == "review") { // loadReviewOrder라는 함수로 따로 정의했지만, 코드가 짧아서 handleOrderSelect 함수에 편입과 async 함수로 변경.
+    const list_review_json = await printJSON("static/data/df_review.json");
+    read_list(list_review_json)
   }
   else if (checked_option == "score") {
-    loadScoreOrder()
+    const list_score_json = await printJSON("static/data/df_score.json");
+    read_list(list_score_json)
   }
   else {
     loadDistanceOrder()
   }
 }
 
-// 정렬 옵션 - 리뷰 많은순
-async function loadReviewOrder() {
-  const list_review_json = await printJSON("static/data/df_review.json");
-  read_list(list_review_json)
-}
-
-// 정렬 옵션 - 평점순
-async function loadScoreOrder() {
-  const list_score_json = await printJSON("static/data/df_score.json");
-  read_list(list_score_json)
-}
 
 // 정렬 옵션 - 거리순
 async function loadDistanceOrder() {
@@ -135,7 +126,7 @@ read_list(list_distance_order)
 
 
 
-// 카테고리 옵션에 따라서 그에 맞는 리스트 정렬 함수 실행
+// 카테고리 옵션에 따라서 그에 맞는 리스트 정렬
 function handleCateSelect() {
   const checked_cate = document.querySelector('#cate-select > option:checked').value
   // console.log(checked_cate)
@@ -158,8 +149,9 @@ function handleCateSelect() {
 }
 
 // 지도에 있는 마커 속 버튼을 누르면 식당명 데이터를 가지고 article 작성 페이지로 넘어가는 함수
-// 231025-23:56: 현재 저장된 html 파일엔 없고, folium에서 수정해서 html 파일로 저장해야 하는데, dataset 수정 중이라 저장이 안되는 상황.
+// 현재 저장된 html 파일엔 없고, folium에서 수정해서 html 파일로 저장해야 하는데, dataset 수정 중이라 저장이 안되는 상황.
 function handleCreateBtn(restaurant_name){
   const name = restaurant_name
+  localStorage.setItem("restaurant_name", name);
   location.href="http://127.0.0.1:5500/article/index.html";
 }
