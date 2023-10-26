@@ -38,25 +38,29 @@
                                 onchange="hadleProfilePreview(this)"><br>
                         </div>
 
-                        <div class="col" style="margin-right: 100px;">
+                        <div class="col" style="margin-right: 100px; max-width: 750px;">
 
-                            <ul class="list-group list-group-horizontal-xxl shadow-sm" style="margin-top: 10px;">
-                                <li>아이디 : </li>
-                                <li>
-                                    <div id="update_username"></div>
-                                </li>
+                            <ul class="list-group list-group-horizontal-xxl shadow-sm"
+                                style="margin-top: 10px; justify-content: center;">
+                                <div>아이디 :
+                                    <span id="update_username"></span>
+                                </div>
                             </ul>
-                            <ul class="list-group list-group-horizontal-xxl shadow-sm" style="margin-top: 10px;">
-                                <li>이메일 : </li>
-                                <li><input id="update_email" value=""></li>
+                            <ul class="list-group list-group-horizontal-xxl shadow-sm"
+                                style="margin-top: 10px; justify-content: center;">
+                                <div>이메일 :
+                                    <span><input id="update_email" value=""></span>
+                                </div>
                             </ul>
-                            <ul class="list-group list-group-horizontal-xxl shadow-sm" style="margin-top: 10px;">
-                                <li>닉네임 : </li>
-                                <li><input id="update_nickname" value=""></li>
+                            <ul class="list-group list-group-horizontal-xxl shadow-sm"
+                                style="margin-top: 10px; justify-content: center;">
+                                <div>닉네임 :
+                                    <span><input id="update_nickname" value=""></span>
+                                </div>
                             </ul>
 
                             <button type="button" id="update_btn" onclick="handleUpdateProfile()"
-                                class="btn btn-outline-secondary shadow-sm" style="margin: 0px;">수정하기</button>
+                                class="btn btn-outline-secondary shadow-sm" style="margin-top: 15px;">수정하기</button>
                         </div>
                     </div>
                 </div>
