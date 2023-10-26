@@ -88,7 +88,7 @@ function displayPlaces(places) {
         // 마커 클릭시 가게 이름과 좌표 추가
         var latitude = marker.position.Ma;
         var longitude = marker.position.La;
-        document.getElementById("store_name").value = title;
+        document.getElementById("store-name").value = title;
         document.getElementById("latitudeField").value = latitude;
         document.getElementById("longitudeField").value = longitude;
       });
