@@ -22,6 +22,10 @@ searchPlaces();
 function searchPlaces() {
   var keyword = document.getElementById("keyword").value;
 
+  if (localStorage.getItem("restaurant_name")) {
+    const recommend_name = localStorage.getItem("restaurant_name")    // 로컬스토리지에 restaurant_name 의 value값이 있다면 그 값을 키워드로 검색.
+    keyword = recommend_name
+  }
   if (!keyword.replace(/^\s+|\s+$/g, "")) {
     alert("키워드를 입력해주세요!");
     return false;
