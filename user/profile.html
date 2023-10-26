@@ -23,50 +23,42 @@
 <body>
     <div id="header"></div>
     <main style="margin-top: 100px;">
-        <form>
-            <div class="container text-center">
-                <div class="row">
-                    <div class="row align-items-center"
-                        style=" position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-                        <div class="col">
-                            <img id="image" style="width: 400px; height: 400px; object-fit: cover;"
-                                class="img-fluid rounded-circle border border-3 shadow"> <br>
-                            <label for="update_image" class="btn btn-outline-secondary shadow-sm"
-                                style="margin: 30px;">이미지
-                                업로드</label>
-                            <input style="display: none;" id="update_image" type="file" accept=".png, .jpg"
-                                onchange="hadleProfilePreview(this)"><br>
-                        </div>
+        <div class="container text-center">
+            <div class="row align-items-center">
+                <div class="col">
+                    <img id="image" style="width: 400px; height: 400px; object-fit: cover;"
+                        class="img-fluid rounded-circle border border-3 shadow"> <br>
+                    <label for="update_image" class="btn btn-outline-secondary shadow-sm" style="margin: 30px;">이미지
+                        업로드</label>
+                    <input style="display: none;" id="update_image" type="file" accept=".png, .jpg"
+                        onchange="hadleProfilePreview(this)"><br>
+                </div>
 
-                        <div class="col" style="margin-right: 100px;">
-
-                            <ul class="list-group list-group-horizontal-xxl shadow-sm" style="margin-top: 10px;">
-                                <li>아이디 : </li>
-                                <li>
-                                    <div id="update_username"></div>
-                                </li>
-                            </ul>
-                            <ul class="list-group list-group-horizontal-xxl shadow-sm" style="margin-top: 10px;">
-                                <li>이메일 : </li>
-                                <li><input id="update_email" value=""></li>
-                            </ul>
-                            <ul class="list-group list-group-horizontal-xxl shadow-sm" style="margin-top: 10px;">
-                                <li>닉네임 : </li>
-                                <li><input id="update_nickname" value=""></li>
-                            </ul>
-
-                            <button type="button" id="update_btn" onclick="handleUpdateProfile()"
-                                class="btn btn-outline-secondary shadow-sm" style="margin: 0px;">수정하기</button>
-                        </div>
-                    </div>
+                <div class="col" style="margin-right: 100px;">
+                    <ul class="list-group list-group-horizontal-xxl shadow-sm" style="margin-top: 10px;">
+                        <li style="list-style-type: none; padding-right: 10px;">아이디 : </li>
+                        <li style="list-style-type: none;">
+                            <div id="update_username"></div>
+                        </li>
+                    </ul>
+                    <br>
+                    <ul class="list-group list-group-horizontal-xxl shadow-sm" style="margin-top: 10px;">
+                        <li style="list-style-type: none; padding-right: 10px;"">이메일 : </li>
+                        <li style=" list-style-type: none;"><input id="update_email" value=""></li>
+                    </ul>
+                    <br>
+                    <ul class="list-group list-group-horizontal-xxl shadow-sm" style="margin-top: 10px;">
+                        <li style="list-style-type: none; padding-right: 10px;"">닉네임 : </li>
+                        <li style=" list-style-type: none;"><input id="update_nickname" value=""></li>
+                    </ul>
+                    <br><br><br>
+                    <button type="button" id="update_btn" onclick="handleUpdateProfile()"
+                        class="btn btn-outline-secondary shadow-sm" style="margin: 0px;">수정하기</button>
                 </div>
             </div>
-
-
-        </form>
+        </div>
     </main>
     <div id="footer"></div>
-
 </body>
 
 </html>
