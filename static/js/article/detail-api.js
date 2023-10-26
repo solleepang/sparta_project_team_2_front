@@ -98,6 +98,13 @@ $("#friend-btn").click(function () {
     putArticle(articleID, editData)
 });
 
+$("#author").click(function () {
+    // 상세페이지에서 작성자 클릭
+    const urlParams = new URLSearchParams(window.location.search);
+    const articleID = urlParams.get("articleID");
+    getArticleInfo(articleID);
+});
+
 async function deleteArticle(articleID) {
   // 게시글 지우기
   let token = localStorage.getItem("access");
@@ -146,3 +153,14 @@ $(document).ready(function () {
         putArticle(articleID, editData)
     });
 });
+
+async function getArticleInfo(articleID) {
+    // 특정 article 정보 요청
+    const response = await fetch(`http://127.0.0.1:8000/article/${articleID}/`, {
+        method: "GET",
+    });
+
+    const response_json = await response.json();
+    const user_id = response_json.author_id;
+    window.location.href = `/user/mypage.html?user_id=${user_id}`;
+}; 
