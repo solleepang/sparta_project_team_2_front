@@ -23,7 +23,7 @@ async function read_list(list_json) {
     const restaurant_article = document.createElement('article')
     const restaurant_image = document.createElement('img')
     restaurant_image.setAttribute("class", "card__background")
-    restaurant_image.setAttribute("src", restaurant.image)
+    restaurant_image.setAttribute("src", restaurant.image_url)
     restaurant_article.setAttribute("class", "card")
     const restaurant_card = await document.createElement('div')
     await restaurant_card.setAttribute("class", "card__content | flow")
