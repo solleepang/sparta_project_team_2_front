@@ -3,7 +3,7 @@ window.onload = () => {
 }
 
 async function handleSignup() {
-    const username = document.getElementById("username").value;
+    const username = document.getElementById("username_input").value;
     const nickname = document.getElementById("nickname").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
