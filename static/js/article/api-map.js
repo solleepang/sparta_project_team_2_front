@@ -46,6 +46,13 @@ function placesSearchCB(data, status, pagination) {
     displayPagination(pagination);
   } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
     alert("검색 결과가 존재하지 않습니다.");
+    const store_name_input = document.getElementById("store_name")
+    // 맛집 추천 지도에서 팝업의 버튼으로 들어온 경우 가게명이 들어가도록 로컬스토리지에 저장된 식당명을 가게명 input에 넣는다.
+    if (localStorage.getItem("restaurant_name")) {
+      const recommend_name = localStorage.getItem("restaurant_name")
+      alert(`가게명: ${recommend_name}, 변경해서 다시 검색 후 마커를 클릭해주세요.`)
+    }
+    window.localStorage.removeItem('restaurant_name') // 로컬스토리지에 있는 restaurant_name이라는 key의 value를 삭제한다.
     return;
   } else if (status === kakao.maps.services.Status.ERROR) {
     alert("검색 결과 중 오류가 발생했습니다.");

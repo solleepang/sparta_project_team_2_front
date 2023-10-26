@@ -153,5 +153,5 @@ function handleCateSelect() {
 function handleCreateBtn(restaurant_name){
   const name = restaurant_name
   localStorage.setItem("restaurant_name", name);
-  location.href="http://127.0.0.1:5500/article/index.html";
+  location.href="http://127.0.0.1:5500/article/post_article.html";
 }
