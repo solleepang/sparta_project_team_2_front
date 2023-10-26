@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로필 페이지</title>
+
+    <!-- js -->
+    <script src="/static/js/main.js"></script>
+    <script defer src="/static/js/profile.js"></script>
+</head>
+
+<body>
+
+    <form>
+        <div class="container text-center">
+            <div class="row">
+                <div class="row align-items-center"
+                    style=" position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                    <div class="col">
+                        <img id="image" style="width: 400px; height: 400px; object-fit: cover;"
+                            class="img-fluid rounded-circle border border-3 shadow"> <br>
+                        <label for="update_image" class="btn btn-outline-secondary shadow-sm" style="margin: 30px;">이미지
+                            업로드</label>
+                        <input style="display: none;" id="update_image" type="file" accept=".png, .jpg"
+                            onchange="hadleProfilePreview(this)"><br>
+                    </div>
+
+                    <div class="col" style="margin-right: 100px;">
+                        <ul class="list-group list-group-horizontal-xxl shadow-sm">
+                            <li>아이디 : </li>
+                            <li> <span id="username" class="btn"></span></li>
+                        </ul>
+                        <ul class="list-group list-group-horizontal-xxl shadow-sm" style="margin-top: 10px;">
+                            <li>이메일 : </li>
+                            <li><input id="update_email"></li>
+                        </ul>
+                        <ul class="list-group list-group-horizontal-xxl shadow-sm" style="margin-top: 10px;">
+                            <li>닉네임 : </li>
+                            <li><input id="update_nickname"></li>
+                        </ul>
+
+                        <button type="button" id="update_btn" onclick="handleUpdateProfile()"
+                            class="btn btn-outline-secondary shadow-sm" style="margin: 0px;">수정하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+</body>
+
+</html>
