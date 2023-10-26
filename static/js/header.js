@@ -22,12 +22,12 @@ $("#logout-btn").click(function () {
     window.location.href = "/";
 });
 
-window.onload = () => {
+function toMypage() {
     const payload = localStorage.getItem("payload")
     const payload_parse = JSON.parse(payload)
     const user_id = payload_parse.user_id
 
     const my_page = document.getElementById('my-page')
-    my_page.setAttribute("href", `/user/mypage.html?user_id=${user_id}`)
+    window.location.href = `http://127.0.0.1:5500//user/mypage.html?user_id=${user_id}`
 
 }
