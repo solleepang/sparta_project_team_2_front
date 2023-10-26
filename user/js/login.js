@@ -16,7 +16,6 @@ async function handleLogin() {
     }),
     });
     const response_json = await response.json();
-    console.log(response_json);
 
     const base64Url = response_json.access.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g,'/');
@@ -29,6 +28,7 @@ async function handleLogin() {
     localStorage.setItem("access", response_json.access);
     localStorage.setItem("refresh", response_json.refresh);
     localStorage.setItem("payload",jsonPayload);
+    saveJWTPayload(response_json.access);
    
     
     window.location.href="http://127.0.0.1:5500/user/profile.html"
