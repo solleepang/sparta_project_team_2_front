@@ -1,7 +1,7 @@
 console.log('hi!')
 
 window.onload = function () {
-  // loadDistanceOrder()
+  loadDistanceOrder()
 }
 
 // json 파일 읽는 함수
@@ -15,6 +15,7 @@ async function printJSON(file_path) {
 // 리스트 정렬하는 함수
 async function read_list(list_json) {
   const restaurant_list = document.getElementById(('card_list'))
+  restaurant_list.innerHTML = ''
   for (var r in list_json) {
     const restaurant = list_json[r]
     // console.log(restaurant)
@@ -23,7 +24,7 @@ async function read_list(list_json) {
     const restaurant_article = document.createElement('article')
     const restaurant_image = document.createElement('img')
     restaurant_image.setAttribute("class", "card__background")
-    restaurant_image.setAttribute("src", restaurant.image)
+    restaurant_image.setAttribute("src", restaurant.image_url)
     restaurant_article.setAttribute("class", "card")
     const restaurant_card = await document.createElement('div')
     await restaurant_card.setAttribute("class", "card__content | flow")
