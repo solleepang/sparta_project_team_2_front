@@ -1,7 +1,7 @@
 console.log('hi!')
 
 window.onload = function () {
-  // loadDistanceOrder()
+  loadDistanceOrder()
 }
 
 // json 파일 읽는 함수
@@ -15,6 +15,7 @@ async function printJSON(file_path) {
 // 리스트 정렬하는 함수
 async function read_list(list_json) {
   const restaurant_list = document.getElementById(('card_list'))
+  restaurant_list.innerHTML = ''
   for (var r in list_json) {
     const restaurant = list_json[r]
     // console.log(restaurant)
