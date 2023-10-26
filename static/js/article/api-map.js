@@ -44,6 +44,7 @@ function placesSearchCB(data, status, pagination) {
 
     // 페이지 번호를 표출합니다
     displayPagination(pagination);
+    window.localStorage.removeItem('restaurant_name')
   } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
     alert("검색 결과가 존재하지 않습니다.");
     const store_name_input = document.getElementById("store_name")
