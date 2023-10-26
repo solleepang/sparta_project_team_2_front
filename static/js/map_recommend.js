@@ -14,10 +14,10 @@ async function printJSON(file_path) {
 
 // 리스트 정렬하는 함수
 function read_list(list_json) {
-  const restaurant_list = document.getElementById(('list'))
+  const restaurant_list = document.getElementById(('card_list'))
   for (var r in list_json) {
     const restaurant = list_json[r]
-    // console.log(restaurant)
+    console.log(restaurant)
 
     // 리스트에 속성 추가
     const restaurant_article = document.createElement('article')
@@ -28,24 +28,25 @@ function read_list(list_json) {
     restaurant_card_container.setAttribute("class", "card__content--container | flow")
     const restaurant_name = document.createElement('h2')
     restaurant_name.setAttribute("class", "card__title")
-    // const address_span = document.createElement('span')
-    // const contact_span = document.createElement('span')
     const restaurant_score = document.createElement('p')
     const restaurant_review = document.createElement('p')
+    const restaurant_contact = document.createElement('p')
+    const restaurant_address = document.createElement('p')
+
 
     restaurant_name.innerText = restaurant.name
-    // address_span.innerText = restaurant.address
-    // contact_span.innerText = restaurant.contact
     restaurant_score.innerText = `평점: ${restaurant.score}`
     restaurant_review.innerText = `리뷰개수: ${restaurant.review}`
+    restaurant_address.innerText = `주소: ${restaurant.address}`
+    restaurant_contact.innerText = restaurant.contact
 
     restaurant_article.appendChild(restaurant_card)
     restaurant_card.appendChild(restaurant_card_container)
     restaurant_card_container.appendChild(restaurant_name)
     restaurant_card_container.appendChild(restaurant_score)
     restaurant_score.appendChild(restaurant_review)
-    // restaurant_card_container.appendChild(score_span)
-    // restaurant_card_container.appendChild(review_span)
+    restaurant_score.appendChild(restaurant_address)
+    restaurant_score.appendChild(restaurant_contact)
 
     restaurant_list.appendChild(restaurant_article)
   }
@@ -53,38 +54,29 @@ function read_list(list_json) {
 
 
 // 정렬 옵션에 따라서 그에 맞는 리스트 정렬 함수 실행
-function handleOrderSelect() {
+async function handleOrderSelect() {
   const checked_option = document.querySelector('#order-by > option:checked').value
-  // console.log(checked_option)
+  console.log(checked_option)
 
-  if (checked_option == "review") {
-    loadReviewOrder()
+  if (checked_option == "review") { // loadReviewOrder라는 함수로 따로 정의했지만, 코드가 짧아서 handleOrderSelect 함수에 편입과 async 함수로 변경.
+    const list_review_json = await printJSON("static/data/df_review.json");
+    read_list(list_review_json)
   }
   else if (checked_option == "score") {
-    loadScoreOrder()
+    const list_score_json = await printJSON("static/data/df_score.json");
+    read_list(list_score_json)
   }
   else {
     loadDistanceOrder()
   }
 }
 
-// 정렬 옵션 - 리뷰 많은순
-async function loadReviewOrder() {
-  const list_review_json = await printJSON("static/data/df_review.json");
-  read_list(list_review_json)
-}
-
-// 정렬 옵션 - 평점순
-async function loadScoreOrder() {
-  const list_score_json = await printJSON("static/data/df_score.json");
-  read_list(list_score_json)
-}
 
 // 정렬 옵션 - 거리순
 async function loadDistanceOrder() {
   // console.log('order by distance 함수 실행')
   const list_json = await printJSON("static/data/df.json");
-  // console.log(list_json)
+  console.log(list_json)
   //거리계산함수
   function getDistance(lat1, lon1, lat2, lon2, unit) {
     if ((lat1 == lat2) && (lon1 == lon2)) {
@@ -107,6 +99,7 @@ async function loadDistanceOrder() {
       return dist;
     }
   }
+
 
   //현위치 불러와서 거리비교 하는 함수 (html5 Geolocation API 사용)
   navigator.geolocation.getCurrentPosition((position) => {
@@ -144,7 +137,6 @@ async function loadDistanceOrder() {
 
 
 
-
 // 카테고리 옵션에 따라서 리스트 정렬 함수에 json 파일을 넣어서 실행
 function handleCateSelect() {
   const checked_cate = document.querySelector('#cate-select > option:checked').value
@@ -178,8 +170,9 @@ async function loadCate(x) {
 
 
 // 지도에 있는 마커 속 버튼을 누르면 식당명 데이터를 가지고 article 작성 페이지로 넘어가는 함수
-// 231025-23:56: 현재 저장된 html 파일엔 없고, folium에서 수정해서 html 파일로 저장해야 하는데, dataset 수정 중이라 저장이 안되는 상황.
+// 현재 저장된 html 파일엔 없고, folium에서 수정해서 html 파일로 저장해야 하는데, dataset 수정 중이라 저장이 안되는 상황.
 function handleCreateBtn(restaurant_name) {
   const name = restaurant_name
-  location.href = "http://127.0.0.1:5500/article/index.html";
+  localStorage.setItem("restaurant_name", name);
+  location.href = "http://127.0.0.1:5500/article/post_article.html";
 }
