@@ -1,4 +1,3 @@
-
 async function handleLogin() {
     // try {
     console.log("로긴연결");
@@ -15,6 +14,7 @@ async function handleLogin() {
         password: password,
     }),
     });
+
     const response_json = await response.json();
 
     const base64Url = response_json.access.split('.')[1];
