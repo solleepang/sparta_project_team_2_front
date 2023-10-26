@@ -17,7 +17,19 @@ async function handleLogin() {
     });
     const response_json = await response.json();
 
+    const base64Url = response_json.access.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g,'/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    
+
     localStorage.setItem("access", response_json.access);
     localStorage.setItem("refresh", response_json.refresh);
+    localStorage.setItem("payload",jsonPayload);
     saveJWTPayload(response_json.access);
+   
+    
+    window.location.href="http://127.0.0.1:5500/user/profile.html"
 }

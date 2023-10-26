@@ -1,3 +1,33 @@
+window.onload = () => {
+    loadProfile()
+}
+
+async function loadProfile() {
+    const payload = localStorage.getItem("payload")
+    const payload_parse = JSON.parse(payload)
+    const request_user_id = payload_parse.user_id
+    
+    console.log(request_user_id)
+    const response = await fetch(`http://127.0.0.1:8000/user/profile/${request_user_id}/`, {
+        method: 'GET',
+        headers: {
+            "Authorization" : "Bearer " + localStorage.getItem("access"),
+        },
+    })
+    const response_json = await response.json()
+    console.log((response_json))
+
+    const username_json = document.getElementById("update_username")
+    const nickname = document.getElementById("update_nickname")
+    const email = document.getElementById("update_email")
+    const user_image = document.getElementById("image")
+    username_json.innerText = `${response_json.username}`
+    nickname.setAttribute("value", `${response_json.nickname}`)
+    email.setAttribute("value", `${response_json.email}`)
+    user_image.src ='http://127.0.0.1:8000'+ response_json.image
+
+}
+
 async function handleUpdateProfile() {
     const payload = localStorage.getItem("payload")
     const payload_parse = JSON.parse(payload)
