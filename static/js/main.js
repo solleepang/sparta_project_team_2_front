@@ -9,18 +9,6 @@ $("#find-friends-btn").click(function () {
     window.location.href = "/article/post_article.html";
   });
 
-function saveJWTPayload(access) {
-  // payload로 저장하기
-  const base64Url = access.split(".")[1];
-  const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-  const jsonPayload = decodeURIComponent(atob(base64).split("").map(function (c) {
-    return "%" + (
-    "00" + c.charCodeAt(0).toString(16)).slice(-2);
-  }).join(""));
-
-  localStorage.setItem("payload", jsonPayload);
-}
-
 function me() {
   // payload에서 유저아이디 얻기
   let payload = localStorage.getItem("payload");
