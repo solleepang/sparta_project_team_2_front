@@ -21,7 +21,7 @@ async function loadMypage() {
     })
     const response_json = await response.json()
     console.log(response_json)
-    console.log(response_json.username)
+    console.log(response_json.nickname)
 
 
     const user_image = document.getElementById("profile_image")
@@ -29,16 +29,14 @@ async function loadMypage() {
     const following_num = document.getElementById("following_count")
     const follower_num = document.getElementById("follower_count")
 
-    nickname.innerText = response_json.username
+    nickname.innerText = response_json.nickname
     following_num.innerText = response_json.following_count
     follower_num.innerText = response_json.follower_count
     const user_image_img = document.createElement('img')
+    user_image_img.style.height = "100px";
     // console.log(response_json.image)
     user_image_img.src = "http://127.0.0.1:8000" + response_json.image
     user_image_img.setAttribute("alt","user image")
-    user_image_img.style.width = "70px";
-    user_image_img.style.height = "70px";
-
     user_image.appendChild(user_image_img)
 }
 
