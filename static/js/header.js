@@ -21,3 +21,13 @@ $("#logout-btn").click(function () {
     localStorage.removeItem("payload");
     window.location.href = "/";
 });
+
+window.onload = () => {
+    const payload = localStorage.getItem("payload")
+    const payload_parse = JSON.parse(payload)
+    const user_id = payload_parse.user_id
+
+    const my_page = document.getElementById('my-page')
+    my_page.setAttribute("href", `/user/mypage.html?user_id=${user_id}`)
+
+}
