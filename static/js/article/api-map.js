@@ -22,6 +22,10 @@ searchPlaces();
 function searchPlaces() {
   var keyword = document.getElementById("keyword").value;
 
+  if (localStorage.getItem("restaurant_name")) {
+    const recommend_name = localStorage.getItem("restaurant_name")    // 로컬스토리지에 restaurant_name 의 value값이 있다면 그 값을 키워드로 검색.
+    keyword = recommend_name
+  }
   if (!keyword.replace(/^\s+|\s+$/g, "")) {
     alert("키워드를 입력해주세요!");
     return false;
@@ -40,8 +44,16 @@ function placesSearchCB(data, status, pagination) {
 
     // 페이지 번호를 표출합니다
     displayPagination(pagination);
+    window.localStorage.removeItem('restaurant_name')
   } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
     alert("검색 결과가 존재하지 않습니다.");
+    const store_name_input = document.getElementById("store_name")
+    // 맛집 추천 지도에서 팝업의 버튼으로 들어온 경우 가게명이 들어가도록 로컬스토리지에 저장된 식당명을 가게명 input에 넣는다.
+    if (localStorage.getItem("restaurant_name")) {
+      const recommend_name = localStorage.getItem("restaurant_name")
+      alert(`가게명: ${recommend_name}, 변경해서 다시 검색 후 마커를 클릭해주세요.`)
+    }
+    window.localStorage.removeItem('restaurant_name') // 로컬스토리지에 있는 restaurant_name이라는 key의 value를 삭제한다.
     return;
   } else if (status === kakao.maps.services.Status.ERROR) {
     alert("검색 결과 중 오류가 발생했습니다.");
@@ -88,7 +100,7 @@ function displayPlaces(places) {
         // 마커 클릭시 가게 이름과 좌표 추가
         var latitude = marker.position.Ma;
         var longitude = marker.position.La;
-        document.getElementById("store_name").value = title;
+        document.getElementById("store-name").value = title;
         document.getElementById("latitudeField").value = latitude;
         document.getElementById("longitudeField").value = longitude;
       });
@@ -148,7 +160,7 @@ function getListItem(index, places) {
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 function addMarker(position, idx, title) {
   var imageSrc =
-      "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png", // 마커 이미지 url, 스프라이트 이미지를 씁니다
+    "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png", // 마커 이미지 url, 스프라이트 이미지를 씁니다
     imageSize = new kakao.maps.Size(36, 37), // 마커 이미지의 크기
     imgOptions = {
       spriteSize: new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
