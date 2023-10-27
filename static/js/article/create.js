@@ -17,8 +17,6 @@
  
 
 async function postArticle(postData) {
-  // TODO: 1)로그인 되었는지 확인, 2)토큰 만료시 새로 발급
-  // payload = getItem("payload");
   // 로그인 토큰 가져오기 
   token = localStorage.getItem("access");
   // 게시글 작성 api 호출
@@ -30,7 +28,6 @@ async function postArticle(postData) {
     method: "POST",
     body: JSON.stringify(postData),
   });
-  const response_json = await response.json();
-  
+    
   location.href = "/";
 };
