@@ -1,7 +1,7 @@
 console.log('hi!')
 
 window.onload = function () {
-  // loadDistanceOrder()
+  loadDistanceOrder()
 }
 
 // json 파일 읽는 함수
@@ -13,17 +13,21 @@ async function printJSON(file_path) {
 }
 
 // 리스트 정렬하는 함수
-function read_list(list_json) {
+async function read_list(list_json) {
   const restaurant_list = document.getElementById(('card_list'))
+  restaurant_list.innerHTML = ''
   for (var r in list_json) {
     const restaurant = list_json[r]
     // console.log(restaurant)
 
     // 리스트에 속성 추가
     const restaurant_article = document.createElement('article')
+    const restaurant_image = document.createElement('img')
+    restaurant_image.setAttribute("class", "card__background")
+    restaurant_image.setAttribute("src", restaurant.image_url)
     restaurant_article.setAttribute("class", "card")
-    const restaurant_card = document.createElement('div')
-    restaurant_card.setAttribute("class", "card__content | flow")
+    const restaurant_card = await document.createElement('div')
+    await restaurant_card.setAttribute("class", "card__content | flow")
     const restaurant_card_container = document.createElement('div')
     restaurant_card_container.setAttribute("class", "card__content--container | flow")
     const restaurant_name = document.createElement('h2')
@@ -45,7 +49,9 @@ function read_list(list_json) {
     else {
       restaurant_distance.innerText = `가게까지의 거리: ${restaurant.distance}km`
     }
-    restaurant_article.appendChild(restaurant_card)
+
+    restaurant_article.appendChild(restaurant_image)
+    await restaurant_article.appendChild(restaurant_card)
     restaurant_card.appendChild(restaurant_card_container)
     restaurant_card_container.appendChild(restaurant_name)
     restaurant_card_container.appendChild(restaurant_score)
